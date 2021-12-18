@@ -40,46 +40,89 @@ Widget NewProject(BuildContext context) {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    var result = (int.parse(pnpController.text) /
-                            (int.parse(pnpController.text) +
-                                int.parse(nppController.text))) +
-                        (int.parse(npnpController.text) /
-                            (int.parse(npnpController.text) +
-                                int.parse(ppController.text)));
-                    var alert = AlertDialog(
-                      title: Text(
-                          'Résultats Calcul après application de la formule'),
-                      content: Column(children: [
-                        Expanded(
-                          child: Container(
-                            child: Text(
-                              "${result}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 23),
-                            ),
-                            width: appViewPort(context).width / 2,
-                            height: appViewPort(context).height / 2,
-                          ),
-                        ),
-                        Container(
-                          height: 50,
-                          width: 150,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
+                    var result;
+
+                    if (pnpController.text != "" &&
+                        nppController.text != "" &&
+                        npnpController.text != "" &&
+                        ppController.text != "") {
+                      result = (int.parse(pnpController.text) /
+                              (int.parse(pnpController.text) +
+                                  int.parse(nppController.text))) +
+                          (int.parse(npnpController.text) /
+                              (int.parse(npnpController.text) +
+                                  int.parse(ppController.text)));
+
+                      var alert = AlertDialog(
+                        title: Text(
+                            'Résultats Calcul après application de la formule'),
+                        content: Column(children: [
+                          Expanded(
+                            child: Container(
                               child: Text(
-                                "Fermer",
-                                style: TextStyle(fontSize: 22),
-                              )),
-                        )
-                      ]),
-                    );
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return alert;
-                        });
+                                "${result}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 23),
+                              ),
+                              width: appViewPort(context).width / 2,
+                              height: appViewPort(context).height / 2,
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: 150,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  "Fermer",
+                                  style: TextStyle(fontSize: 22),
+                                )),
+                          )
+                        ]),
+                      );
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          });
+                    } else {
+                      var alert = AlertDialog(
+                        title: Text(
+                            'Résultats Calcul après application de la formule'),
+                        content: Column(children: [
+                          Expanded(
+                            child: Container(
+                              child: Text(
+                                "Veuillez saisir des valeurs correctes",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 23),
+                              ),
+                              width: appViewPort(context).width / 2,
+                              height: appViewPort(context).height / 2,
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: 150,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  "Fermer",
+                                  style: TextStyle(fontSize: 22),
+                                )),
+                          )
+                        ]),
+                      );
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          });
+                    }
                   },
                   child: Text(
                     'Sauvegarder',
