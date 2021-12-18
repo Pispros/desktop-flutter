@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:demo_app/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,9 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
       initialIndex: 0,
       length: 3,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: appMainColor,
           leading: Icon(
             CupertinoIcons.book,
             color: Colors.white,

@@ -4,6 +4,7 @@ import 'package:demo_app/Screens/Comparer/comparer.dart';
 import 'package:demo_app/Screens/Projets/projects.dart';
 import 'package:demo_app/Screens/Projets/recent.projects.dart';
 import 'package:demo_app/Screens/Results/results.dart';
+import 'package:demo_app/constants/colors.dart';
 import 'package:demo_app/constants/environnement.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,14 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget choosenOption = RecentsProjects();
+  bool choosenOptionStateTap = false;
+  Color choosenOptionColor = appMainColor;
+  int currentIndex = -1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: Container(
         child: Row(
           children: [
@@ -27,11 +33,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Container(
               width: appViewPort(context).width * 20 / 100,
               height: appViewPort(context).height,
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50),
-                      bottomRight: Radius.circular(50))),
               child: SingleChildScrollView(
                 child: Column(
                   children: toolsetOption(),
@@ -56,15 +57,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         "index": 0,
         "name": "Projets",
         "widget": ProjectsScreen(),
-        "icon": Icon(CupertinoIcons.book)
+        "icon": CupertinoIcons.book
       },
       {
         "index": 1,
         "name": "Comparer",
         "widget": ComparisonScreen(),
-        "icon": Icon(Icons.trending_up)
+        "icon": Icons.trending_up
       },
-      {"index": 2, "name": "Déconnexion", "icon": Icon(Icons.logout)},
+      {"index": 2, "name": "Déconnexion", "icon": Icons.logout},
     ];
 
     List<Widget> list = [];
@@ -90,42 +91,66 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Widget generateMenuOption(dynamic element) {
-    return InkWell(
-      hoverColor: Colors.blueAccent,
-      onTap: () {
-        setState(() {
-          if (element["index"] == 2)
-            Navigator.of(context).pushNamed("login");
-          else
-            choosenOption = element["widget"];
-        });
-      },
-      child: Container(
-        height: 60,
-        margin: const EdgeInsets.only(top: 0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 15,
-            ),
-            element["icon"],
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              element["name"],
-              style: TextStyle(fontSize: 18),
-            ),
-            Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [Icon(CupertinoIcons.right_chevron)],
-            )),
-            SizedBox(
-              width: 25,
-            ),
-          ],
+    return Material(
+      color: currentIndex == element["index"]
+          ? choosenOptionColor
+          : Colors.grey.shade200,
+      child: InkWell(
+        //hoverColor: appMainColor,
+        splashColor: appMainColor,
+        onTap: () {
+          setState(() {
+            currentIndex = element["index"];
+            if (element["index"] == 2)
+              Navigator.of(context).pushNamed("login");
+            else
+              choosenOption = element["widget"];
+          });
+        },
+        child: Container(
+          height: 60,
+          margin: const EdgeInsets.only(top: 0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 15,
+              ),
+              Icon(
+                element["icon"],
+                color: currentIndex == element["index"]
+                    ? Colors.white
+                    : Colors.black,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Text(
+                element["name"],
+                style: TextStyle(
+                  fontSize: 18,
+                  color: currentIndex == element["index"]
+                      ? Colors.white
+                      : Colors.black,
+                ),
+              ),
+              Expanded(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(
+                    CupertinoIcons.right_chevron,
+                    color: currentIndex == element["index"]
+                        ? Colors.white
+                        : Colors.black,
+                  )
+                ],
+              )),
+              SizedBox(
+                width: 25,
+              ),
+            ],
+          ),
         ),
       ),
     );
