@@ -1,4 +1,4 @@
-# demo_app
+# Starter Project for Flutter Dashboard Desktop app
 
 A new Flutter project.
 
