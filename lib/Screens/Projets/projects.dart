@@ -25,7 +25,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
           ),
           bottom: const TabBar(
             labelColor: Colors.white,
-            indicatorColor: Colors.black,
+            indicatorColor: Colors.white,
             tabs: <Widget>[
               Tab(
                 text: "MES PROJETS",
