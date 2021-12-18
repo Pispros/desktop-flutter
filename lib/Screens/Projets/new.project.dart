@@ -3,6 +3,10 @@ import 'dart:ui';
 import 'package:demo_app/constants/environnement.dart';
 import 'package:flutter/material.dart';
 
+TextEditingController pnpController = new TextEditingController();
+TextEditingController nppController = new TextEditingController();
+TextEditingController npnpController = new TextEditingController();
+TextEditingController ppController = new TextEditingController();
 Widget NewProject(BuildContext context) {
   return Container(
     height: appViewPort(context).height,
@@ -11,7 +15,7 @@ Widget NewProject(BuildContext context) {
       children: [
         // Scrollable Variables List
         Container(
-          height: appViewPort(context).height * 73.9 / 100,
+          height: appViewPort(context).height * 73 / 100,
           width: appViewPort(context).width * 80 / 100,
           margin: const EdgeInsets.only(top: 30),
           child: SingleChildScrollView(
@@ -35,7 +39,48 @@ Widget NewProject(BuildContext context) {
                   width: 50,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    var result = (int.parse(pnpController.text) /
+                            (int.parse(pnpController.text) +
+                                int.parse(nppController.text))) +
+                        (int.parse(npnpController.text) /
+                            (int.parse(npnpController.text) +
+                                int.parse(ppController.text)));
+                    var alert = AlertDialog(
+                      title: Text(
+                          'Résultats Calcul après application de la formule'),
+                      content: Column(children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              "${result}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 23),
+                            ),
+                            width: appViewPort(context).width / 2,
+                            height: appViewPort(context).height / 2,
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          width: 150,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                "Fermer",
+                                style: TextStyle(fontSize: 22),
+                              )),
+                        )
+                      ]),
+                    );
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return alert;
+                        });
+                  },
                   child: Text(
                     'Sauvegarder',
                     style: TextStyle(fontSize: 20),
@@ -62,7 +107,12 @@ Widget NewProject(BuildContext context) {
   );
 }
 
-List variables = ["PNP", "NPP", "NPNP", "PP"];
+List variables = [
+  {"name": "PNP", "controller": pnpController},
+  {"name": "NPP", "controller": nppController},
+  {"name": "NPNP", "controller": npnpController},
+  {"name": "PP", "controller": ppController},
+];
 
 List<Widget> ListOfVariables(BuildContext context) {
   List<Widget> list = [];
@@ -87,7 +137,7 @@ Widget generateAVariableInputSet(BuildContext context, dynamic varName) {
           decoration:
               BoxDecoration(border: Border.all(color: Colors.black, width: 1)),
           child: Text(
-            varName,
+            varName["name"],
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
           ),
         )),
@@ -100,6 +150,7 @@ Widget generateAVariableInputSet(BuildContext context, dynamic varName) {
           decoration:
               BoxDecoration(border: Border.all(color: Colors.black, width: 1)),
           child: TextField(
+            controller: varName["controller"],
             decoration: InputDecoration(
                 labelStyle: TextStyle(fontSize: 20),
                 border: InputBorder.none,
