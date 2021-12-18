@@ -70,7 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     List<Widget> list = [];
     list.add(SizedBox(
-      height: 100,
+      height: 30,
     ));
     list.add(Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +82,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ],
     ));
     list.add(SizedBox(
-      height: 50,
+      height: 30,
     ));
     for (var i = 0; i < listOptions.length; i++) {
       list.add(generateMenuOption(listOptions[i]));

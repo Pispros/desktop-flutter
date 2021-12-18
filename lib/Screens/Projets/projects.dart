@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:demo_app/Screens/Projets/new.project.dart';
+import 'package:demo_app/Screens/Projets/results.project.dart';
 import 'package:demo_app/constants/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,17 +43,13 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: <Widget>[
             Center(
               child: Text("Mes projets"),
             ),
-            Center(
-              child: Text("Nouveau Projet"),
-            ),
-            Center(
-              child: Text("Mes Résultats"),
-            ),
+            NewProject(context),
+            ResultsTab(context)
           ],
         ),
       ),
