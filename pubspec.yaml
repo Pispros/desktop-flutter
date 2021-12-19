@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   pie_chart: ^5.1.0
   charts_painter: ^2.0.0
+  syncfusion_flutter_xlsio: ^19.1.64-beta
+  path_provider: ^2.0.1
+  open_file: ^3.2.1
+  universal_html: ^2.0.8
 
 dev_dependencies:
   flutter_test:

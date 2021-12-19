@@ -18,7 +18,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
-      length: 3,
+      length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -37,9 +37,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
               Tab(
                 text: "NOUVEAU PROJET",
               ),
-              Tab(
-                text: "MES RESULTATS",
-              ),
             ],
           ),
         ),
@@ -49,7 +46,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
               child: Text("Mes projets"),
             ),
             NewProject(context),
-            ResultsTab(context)
           ],
         ),
       ),
